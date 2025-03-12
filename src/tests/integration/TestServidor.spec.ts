@@ -1,13 +1,16 @@
 import { app } from "main/app";
+import { sequelize } from "main/database/connections/db";
 import { Servidor, ServidorInstance } from "main/models/Servidor";
 import request from "supertest";
+
+beforeAll(async () => {
+  await sequelize.sync({ force: true });
+});
 
 describe("Teste entre rota listarServidores e banco de dados", () => {
   const listaIdsServidor = new Array<number>();
 
   beforeAll(async () => {
-    await Servidor.sync({ force: true });
-
     let servidor = await Servidor.create({
       nomeCompleto: "Joao da Silva",
       email: "joao@teste.com",

@@ -3,6 +3,7 @@ import path from "path";
 import dotenv from "dotenv";
 import cors from "cors";
 import routes from "./routes/routes";
+import { sequelize } from "./database/connections/db";
 
 dotenv.config();
 
@@ -28,9 +29,15 @@ app.use(errorHandler);
 // Exporta a instância do Express
 export { app };
 
-if (process.env.NODE_ENV !== "test") {
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
-  });
-}
+const setup = async () => {
+  if (process.env.NODE_ENV !== "test") {
+    await sequelize.sync();
+
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`Servidor rodando na porta ${PORT}`);
+    });
+  }
+};
+
+setup();

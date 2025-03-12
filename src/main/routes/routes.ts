@@ -10,5 +10,6 @@ router.get('/', (_req, res) => {
 
 // ServidorController
 router.get('/servidores', ServidorController.listarServidores)
+router.post('/servidores', ServidorController.incluirServidor)
 
 export default router

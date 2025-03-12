@@ -87,15 +87,17 @@ describe("Teste entre rota incluirServidor e banco de dados", () => {
     const existente = await Servidor.create(servidorExistenteDados)
     servidorExistenteId = existente.id
 
-    const novoSerivdorDados = {
+    const novoServidorDados = {
       nomeCompleto: "Joao da Silva",
       email: "joao@teste.com",
       matricula: "1001",
       cpf: "123.456.789-10"
     }
 
-    const response = await request(app).post('/servidores').send(novoSerivdorDados)
-
+    const response = await request(app).post('/servidores').send(novoServidorDados)
+    if (response.body.id) {
+      servidorId = response.body.id
+    }
     expect(response.status).toBe(403)
     expect(response.body).toHaveProperty("message")
     expect(response.body.message).toBe("Erro ao cadastrar servidor: Matrícula já cadastrada")
@@ -120,6 +122,9 @@ describe("Teste entre rota incluirServidor e banco de dados", () => {
     }
 
     const response = await request(app).post('/servidores').send(novoSerivdorDados)
+    if (response.body.id) {
+      servidorId = response.body.id
+    }
 
     expect(response.status).toBe(403)
     expect(response.body).toHaveProperty("message")

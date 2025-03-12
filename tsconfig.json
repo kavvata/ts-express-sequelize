@@ -21,12 +21,13 @@
     "target": "es6",
     "typeRoots": [
       "./src/typings",
-      "../../node_modules/@types"
+      "./node_modules/@types"
     ],
     "outDir": "build"
   },
   "include": [
-    "./**/*.ts"
+    "./**/*.ts",
+    "src/main/database/sequelize.config.js"
   ],
   "exclude": [
     "node_modules",

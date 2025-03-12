@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Servidor } from "main/database/models/Servidor";
+import { Servidor } from "main/models/Servidor";
 
 export const listarServidores = async (_req: Request, res: Response) => {
   const servidores = await Servidor.findAll();

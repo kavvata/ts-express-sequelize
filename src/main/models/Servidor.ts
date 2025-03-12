@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import { sequelize } from "../connections/sqlite";
+import { sequelize } from "main/database/connections/sqlite";
 
 export interface ServidorInstance extends Model {
   id: number,

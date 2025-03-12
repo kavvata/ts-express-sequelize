@@ -1,5 +1,5 @@
 import { app } from "main/app";
-import { Servidor, ServidorInstance } from "main/database/models/Servidor";
+import { Servidor, ServidorInstance } from "main/models/Servidor";
 import request from "supertest";
 
 describe("Teste entre rota listarServidores e banco de dados", () => {

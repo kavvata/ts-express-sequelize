@@ -17,12 +17,16 @@ export const incluirServidor = async (req: Request, res: Response) => {
 
   let existente = await Servidor.findOne({ where: { matricula: matricula } });
   if (existente) {
-    res.status(403).send({ message: "Erro ao cadastrar servidor: Matrícula já cadastrada" });
+    res
+      .status(403)
+      .send({ message: "Erro ao cadastrar servidor: Matrícula já cadastrada" });
     return;
   }
   existente = await Servidor.findOne({ where: { cpf: cpf } });
   if (existente) {
-    res.status(403).send({ message: "Erro ao cadastrar servidor: CPF já cadastrado" });
+    res
+      .status(403)
+      .send({ message: "Erro ao cadastrar servidor: CPF já cadastrado" });
     return;
   }
 

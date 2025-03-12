@@ -1,15 +1,15 @@
-import { Router } from "express"
+import { Router } from "express";
 
-import * as ServidorController from "main/controllers/ServidorController"
+import * as ServidorController from "main/controllers/ServidorController";
 
-const router = Router()
+const router = Router();
 
-router.get('/', (_req, res) => {
-  res.send('oi mae!')
-})
+router.get("/", (_req, res) => {
+  res.send("oi mae!");
+});
 
 // ServidorController
-router.get('/servidores', ServidorController.listarServidores)
-router.post('/servidores', ServidorController.incluirServidor)
+router.get("/servidores", ServidorController.listarServidores);
+router.post("/servidores", ServidorController.incluirServidor);
 
-export default router
+export default router;

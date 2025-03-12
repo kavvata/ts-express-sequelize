@@ -1,15 +1,15 @@
-import { Sequelize } from 'sequelize';
-import dotenv from 'dotenv'
+import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 
-dotenv.config()
+dotenv.config();
 
-let storage = process.env.SQLITE_STORAGE
+let storage = process.env.SQLITE_STORAGE;
 
 if (process.env.NODE_ENV === "test") {
-  storage = process.env.TEST_SQLITE_STORAGE
+  storage = process.env.TEST_SQLITE_STORAGE;
 }
 
 export const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: storage
+  dialect: "sqlite",
+  storage: storage,
 });

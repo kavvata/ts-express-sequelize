@@ -14,10 +14,10 @@ export const Servidor = sequelize.define<ServidorInstance>('Servidor', {
     autoIncrement: true,
     type: DataTypes.INTEGER
   },
-  nomeCompleto: DataTypes.STRING,
-  cpf: DataTypes.STRING,
-  matricula: DataTypes.STRING,
-  email: DataTypes.STRING
+  nomeCompleto: { type: DataTypes.STRING },
+  cpf: { type: DataTypes.STRING },
+  matricula: { type: DataTypes.STRING },
+  email: { type: DataTypes.STRING }
 }, {
   tableName: 'servidores',
 })

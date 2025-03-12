@@ -2,7 +2,7 @@ import { app } from "main/app";
 import { Servidor, ServidorInstance } from "main/database/models/Servidor";
 import request from "supertest";
 
-describe("Teste de rotas de listagem de servidores", () => {
+describe("Teste entre rota listarServidores e banco de dados", () => {
   const listaIdsServidor = new Array<number>
 
   beforeAll(async () => {
@@ -30,7 +30,7 @@ describe("Teste de rotas de listagem de servidores", () => {
   })
 
   it("deve listar todos os servidores com sucesso", async () => {
-    const response = await request(app).get('/servidores/')
+    const response = await request(app).get('/servidores')
 
     expect(response.status).toBe(200)
     expect(response.body).toHaveProperty('servidores')

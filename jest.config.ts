@@ -7,6 +7,6 @@ module.exports = {
     "^.+\\.ts$": ["ts-jest", { tsconfig: "tsconfig.json" }],
   },
   moduleNameMapper: {
-    "^main/(.*)$": "<rootDir>/src/main/$1", // 👈 Map 'main/*' to 'src/main/*'
+    "^main/(.*)$": "<rootDir>/src/main/$1",
   },
 };

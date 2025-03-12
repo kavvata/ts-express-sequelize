@@ -6,6 +6,8 @@ describe("Teste entre rota listarServidores e banco de dados", () => {
   const listaIdsServidor = new Array<number>();
 
   beforeAll(async () => {
+    await Servidor.sync({ force: true });
+
     let servidor = await Servidor.create({
       nomeCompleto: "Joao da Silva",
       email: "joao@teste.com",

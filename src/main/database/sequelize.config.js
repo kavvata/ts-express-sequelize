@@ -1,8 +1,6 @@
-import dotenv from 'dotenv'
+require('dotenv').config()
 
-dotenv.config()
-
-export default {
+module.exports = {
   "development": {
     "storage": process.env.SQLITE_STORAGE,
     "dialect": "sqlite"

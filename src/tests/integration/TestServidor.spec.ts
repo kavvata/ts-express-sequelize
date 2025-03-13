@@ -147,4 +147,19 @@ describe("Teste entre rota incluirServidor e banco de dados", () => {
       "Erro ao cadastrar servidor: CPF já cadastrado",
     );
   });
+
+  it("deve retornar erro ao enviar dados que não condizem com a definição de Servidor", async () => {
+    const dados = {
+      foo: "bar",
+      fizz: "buzz",
+    };
+
+    const response = await request(app).post("/servidores").send(dados);
+
+    expect(response.status).toBe(422);
+    expect(response.body).toHaveProperty("message");
+    expect(response.body.message).toBe(
+      "Erro ao cadastrar servidor: dados do servidor inválidos.",
+    );
+  });
 });

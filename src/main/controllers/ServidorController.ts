@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Servidor } from "main/models/Servidor";
+import { Servidor, ServidorCreationAttributes } from "main/models/Servidor";
 
 export const listarServidores = async (_req: Request, res: Response) => {
   const servidores = await Servidor.findAll();
@@ -13,16 +13,27 @@ export const listarServidores = async (_req: Request, res: Response) => {
 };
 
 export const incluirServidor = async (req: Request, res: Response) => {
-  const { nomeCompleto, email, matricula, cpf } = req.body;
+  const attrsObrigatorios = ["matricula", "cpf", "email", "nomeCompleto"];
 
-  let existente = await Servidor.findOne({ where: { matricula: matricula } });
+  if (!attrsObrigatorios.some((attr) => req.body[attr])) {
+    res.status(422).send({
+      message: "Erro ao cadastrar servidor: dados do servidor inválidos.",
+    });
+    return;
+  }
+
+  const attrs = req.body as ServidorCreationAttributes;
+
+  let existente = await Servidor.findOne({
+    where: { matricula: attrs.matricula },
+  });
   if (existente) {
     res
       .status(403)
       .send({ message: "Erro ao cadastrar servidor: Matrícula já cadastrada" });
     return;
   }
-  existente = await Servidor.findOne({ where: { cpf: cpf } });
+  existente = await Servidor.findOne({ where: { cpf: attrs.cpf } });
   if (existente) {
     res
       .status(403)
@@ -32,10 +43,10 @@ export const incluirServidor = async (req: Request, res: Response) => {
 
   try {
     const novoServidor = await Servidor.create({
-      nomeCompleto: nomeCompleto,
-      email: email,
-      matricula: matricula,
-      cpf: cpf,
+      nomeCompleto: attrs.nomeCompleto,
+      email: attrs.email,
+      matricula: attrs.matricula,
+      cpf: attrs.cpf,
     });
 
     res.status(201).send(novoServidor);

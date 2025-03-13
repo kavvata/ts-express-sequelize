@@ -11,7 +11,7 @@ interface ServidorAttributes {
   setorId?: number;
 }
 
-interface ServidorCreationAttributes
+export interface ServidorCreationAttributes
   extends Optional<ServidorAttributes, "id"> {}
 
 export class Servidor extends Model<

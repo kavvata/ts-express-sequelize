@@ -1,6 +1,6 @@
 import { app } from "main/app";
 import { sequelize } from "main/database/connections/db";
-import { Servidor, ServidorInstance } from "main/models/Servidor";
+import { Servidor } from "main/models/Servidor";
 import request from "supertest";
 
 beforeAll(async () => {
@@ -41,7 +41,7 @@ describe("Teste entre rota listarServidores e banco de dados", () => {
     expect(response.body).toHaveProperty("servidores");
     expect(response.body.servidores).toBeInstanceOf(Array);
 
-    response.body.servidores.forEach((servidor: ServidorInstance) => {
+    response.body.servidores.forEach((servidor: Servidor) => {
       expect(listaIdsServidor).toContain(servidor.id);
     });
   });

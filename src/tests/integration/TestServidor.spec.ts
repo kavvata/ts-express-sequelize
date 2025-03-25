@@ -75,7 +75,9 @@ describe("Teste entre rota incluirServidor e banco de dados", () => {
     expect(response.body).toHaveProperty("id");
     servidorId = response.body.id as number;
 
-    expect(response.body.nomeCompleto as string).toBe(servidorDados.nomeCompleto);
+    expect(response.body.nomeCompleto as string).toBe(
+      servidorDados.nomeCompleto,
+    );
     expect(response.body.email as string).toBe(servidorDados.email);
     expect(response.body.matricula as string).toBe(servidorDados.matricula);
     expect(response.body.cpf as string).toBe(servidorDados.cpf);
@@ -99,14 +101,18 @@ describe("Teste entre rota incluirServidor e banco de dados", () => {
       cpf: "123.456.789-10",
     };
 
-    const response = await request(app).post("/servidores").send(novoServidorDados);
+    const response = await request(app)
+      .post("/servidores")
+      .send(novoServidorDados);
 
     if (response.body.id) {
       servidorId = response.body.id;
     }
     expect(response.status).toBe(403);
     expect(response.body).toHaveProperty("message");
-    expect(response.body.message).toBe("Erro ao cadastrar servidor: Matrícula já cadastrada");
+    expect(response.body.message).toBe(
+      "Erro ao cadastrar servidor: Matrícula já cadastrada",
+    );
   });
 
   it("deve retornar erro ao tentar cadastrar servidor com mesmo cpf", async () => {
@@ -127,7 +133,9 @@ describe("Teste entre rota incluirServidor e banco de dados", () => {
       cpf: "123.456.789-10",
     };
 
-    const response = await request(app).post("/servidores").send(novoServidorDados);
+    const response = await request(app)
+      .post("/servidores")
+      .send(novoServidorDados);
 
     if (response.body.id) {
       servidorId = response.body.id;
@@ -135,7 +143,9 @@ describe("Teste entre rota incluirServidor e banco de dados", () => {
 
     expect(response.status).toBe(403);
     expect(response.body).toHaveProperty("message");
-    expect(response.body.message).toBe("Erro ao cadastrar servidor: CPF já cadastrado");
+    expect(response.body.message).toBe(
+      "Erro ao cadastrar servidor: CPF já cadastrado",
+    );
   });
 
   it("deve retornar erro ao enviar dados que não condizem com a definição de Servidor", async () => {
@@ -148,6 +158,8 @@ describe("Teste entre rota incluirServidor e banco de dados", () => {
 
     expect(response.status).toBe(422);
     expect(response.body).toHaveProperty("message");
-    expect(response.body.message).toBe("Erro ao cadastrar servidor: dados do servidor inválidos.");
+    expect(response.body.message).toBe(
+      "Erro ao cadastrar servidor: dados do servidor inválidos.",
+    );
   });
 });
